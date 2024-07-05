@@ -57,8 +57,18 @@ function calculateNetSalary(basicSalary, benefits) {
   }
 
   // Calculate NSSF Deductions
-  let tier1 = Math.min(grossSalary, 7000) * 0.06;
-  let tier2 = Math.min(grossSalary - 7000, 36000) * 0.06;
+  let tier1 = 0;
+  let tier2 = 0;
+  if (grossSalary <= 7000) {
+      tier1 = grossSalary * 0.06;
+  } else {
+      tier1 = 7000 * 0.06;
+      if (grossSalary <= 43000) {
+          tier2 = (grossSalary - 7000) * 0.06;
+      } else {
+          tier2 = 36000 * 0.06;
+      }
+  }
   let nssf = tier1 + tier2;
 
   // Calculate Housing Levy
